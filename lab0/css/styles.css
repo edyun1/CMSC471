@@ -1,0 +1,27 @@
+/* Reset default styles */
+* {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* Why: Creates consistent starting point */
+
+/* Typography styling */
+h1 {
+    color: #2c3e50;  
+}
+
+/* Class selector */
+.intro {
+    color: #34495e;
+    font-size: 18px;
+}
+
+/* ID selector */
+#content {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #4783de;
+    border-radius: 5px;  /* Rounded corners */
+}
