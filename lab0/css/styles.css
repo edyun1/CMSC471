@@ -7,6 +7,10 @@
 }
 /* Why: Creates consistent starting point */
 
+body {
+    background-color: aquamarine;
+}
+
 /* Typography styling */
 h1 {
     color: #2c3e50;  
@@ -22,6 +26,6 @@ h1 {
 #content {
     margin-top: 20px;
     padding: 20px;
-    background-color: #4783de;
+    background-color: #f7f9fc;
     border-radius: 5px;  /* Rounded corners */
 }

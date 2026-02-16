@@ -30,3 +30,10 @@ function getRandomColor() {
     return color;
 }
 /* Why: Creates random color for interaction */
+
+const button = document.getElementById("myButton");
+
+button.addEventListener("click", () => {
+  const bgColor = getComputedStyle(document.body).backgroundColor;
+  heading.style.color = bgColor;
+});
