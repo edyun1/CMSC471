@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2: White Hat/Black Hat Visualization</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>A2: White Hat/Black Hat Visualization</h1>
+        <p class="course">CMSC471: Introduction to Data Visualization &middot; Spring 2026 &middot; Ed Yun and Andrew Zhang</p>
+
+        <!-- DATASET -->
+        <h2>Dataset and Background</h2>
+        <p>
+            We used the OECD Greenhouse Gas Emissions dataset, which contains per capita greenhouse
+            gas emissions data across roughly 90+ countries from 2014 to 2023. The metric is total
+            greenhouse gas emissions excluding land use, land-use change, and forestry (LULUCF),
+            expressed in kilograms of CO&#x2082;-equivalent per person (kg CO&#x2082;e/person). The dataset
+            covers all major greenhouse gases.
+        </p>
+        <p>
+            One important characteristic of this dataset is that not all countries report data for
+            every year. Some countries have complete coverage across 2014&ndash;2023 while others only
+            appear in a handful of years. The dataset also contains regional aggregates like
+            EU27_2020, OECDA, and OECDSO that are not individual countries, as well as small
+            city-states like VAT (Vatican City) whose per capita figures are statistically
+            meaningless at a global/national scale. These features influenced the design decisions
+            for both visualizations.
+        </p>
+        <p>
+            Our visualization aims to answer: which countries emit the most greenhouse gases per
+            person, and how does each country compare to the global average for a given year?
+        </p>
+
+        <!-- WHITE HAT -->
+        <h2>White Hat Visualization</h2>
+        <div class='tableauPlaceholder' id='viz1775593937649' style='position: relative'>
+            <noscript>
+                <a href='#'><img alt='Greenhouse Gas Emissions Per Capita by Country' src='https://public.tableau.com/static/images/KH/KHGZHS8WR/1_rss.png' style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='path' value='shared&#47;KHGZHS8WR' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/KH/KHGZHS8WR/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1775593937649');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <h3>White Hat Write-up</h3>
+        <p>
+            The white hat visualization is a horizontal bar chart showing per capita greenhouse gas
+            emissions by country for a selected year. Each bar is colored using a sequential
+            blue-to-orange gradient where warmer colors indicate higher emissions, giving the reader
+            two visual channels &mdash; bar length and color &mdash; that reinforce the same information.
+            Bars are sorted in descending order so the highest emitters are immediately visible at
+            the top without requiring the reader to scan the whole chart. A reference line marking
+            the dataset average is included so readers can visually benchmark any country without doing
+            mental math, and every bar is labeled with its exact value. The X-axis is clearly
+            titled with the full unit (kg CO&#x2082;-equivalent per person) so there is no ambiguity
+            about what is being measured.
+        </p>
+        <p>
+            Several entries were excluded with full transparency: VAT (Vatican City), a city-state 
+            of roughly 800 people whose per capita figure is statistically meaningless at a global scale, 
+            and the regional aggregates EU27_2020, OECDA, OECDSO, and OECD, which represent grouped 
+            averages rather than individual countries and would be misleading to compare alongside 
+            national figures. All other countries present in the dataset for the selected year are shown. 
+            The year filter was implemented as a single-value dropdown rather than a range selector. 
+            This was a deliberate design choice — because different countries report data for different years, 
+            allowing a range selection would silently sum unequal amounts of data across countries and produce 
+            a misleading comparison. Forcing the reader to pick one specific year ensures every country shown 
+            is measured on equal footing. The default is set to 2019, which has strong country coverage across 
+            the dataset.
+        </p>
+        <p>
+            To go beyond simple filtering and sorting, we created a custom calculated field called
+            <strong>Deviation from Average</strong>, defined as each country's emissions value
+            minus the average across all countries for the selected year. This computed field
+            appears in the tooltip on hover, so when a reader mouses over any bar they can see
+            both the raw emissions value and exactly how far above or below the global average
+            that country sits. This gives the reader a meaningful point of comparison without
+            cluttering the main chart with extra numbers.
+        </p>
+
+        <!-- BLACK HAT -->
+        <h2>Black Hat Visualization</h2>
+        <div class='tableauPlaceholder' id='viz_blackhat' style='position: relative'>
+            <noscript>
+                <a href='#'><img alt='Greenhouse Gas Emissions Per Capita by Country' src='https://public.tableau.com/static/images/A2/A2_17753727878980/Whitehat2/1_rss.png' style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='A2_17753727878980&#47;Whitehat2' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/A2/A2_17753727878980/Whitehat2/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz_blackhat');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+        <h3>Black Hat Write-up</h3>
+        <p>
+            The black hat visualization uses the same OECD dataset but applies a series of
+            intentional design decisions that distort the reader's perception in ways that are
+            difficult to detect at a glance. The most significant deception is invisible &mdash;
+            instead of filtering to a single year like the white hat viz, this chart sums all
+            reported years from 2014 to 2023 into one combined value per country with no
+            disclosure that this is happening. Because countries report data for different numbers
+            of years, this means countries with fewer reporting years appear to have dramatically
+            lower emissions than countries that reported consistently. A country like Saudi Arabia
+            ends up looking far lower than it actually is for any given year purely because it
+            reported less frequently. The reader has no way of knowing this since there is no
+            year label, no note about aggregation, and no methodology explanation anywhere on
+            the chart.
+        </p>
+        <p>
+            On top of that, the chart silently filters to only show countries above a certain
+            emissions threshold (keeping only major emitters), removing all 
+            low-emitting countries from view entirely without
+            any explanation. We also made the X-axis start at 18 rather than 0 making it seem
+            like the lower end of high emitters are very close to nothing when in reality they are far above 0. 
+            The outliers VAT (Vatican City) and BRN (Brunei) are
+            deliberately kept in the dataset, which forces the color gradient to stretch all the
+            way to their extreme values and compresses most real countries into a narrow band of
+            similar-looking blue bars, making meaningful differences between them nearly invisible.
+            The X-axis is labeled "Emissions Value" &mdash; a broad label that tells the
+            reader absolutely nothing about units or what is actually being measured. The title
+            omits the year, the unit, and any methodology. A color legend labeled "Obs Value"
+            adds visual noise without explaining anything. Finally, a median and an average
+            reference line are displayed simultaneously, calculated on the already manipulated
+            and unevenly aggregated dataset, adding a false appearance of analytical rigor while
+            actually contributing to clutter and confusion. Along with quartiles that add clutter and 
+            do not help as the data is already being ruined by outliers. 
+        </p>
+
+        <!-- DEVELOPMENT -->
+        <h2>Development Process</h2>
+        <p>
+            We worked together as a pair on this project just in-person at Mckeldin.
+            We would say basically just split the work evenly as we did all of Tableau 
+            on one laptop together and split the webpage portion fairly.
+            A significant portion of time was spent
+            understanding the structure of the OECD dataset and figuring out what each column
+            actually meant, since the CSV uses abbreviated ISO country codes and dense data
+            columns that are not immediately readable. Building both visualizations in Tableau
+            Public took additional time, particularly getting the color encoding, reference line,
+            year dropdown, and Deviation from Average calculated field working correctly for the
+            white hat viz. Also coming up with creative ways for both white hat and 
+            black hat aspects proved to be a little challenging as we never had to think this way.
+            Writing the write-ups and putting together the webpage added time on
+            top of that. We had trouble getting the visuals to show correctly and separately.
+            Overall the project took approximately 7&ndash;9 hours.
+        </p>
+        <p>
+        </p>
+
+        <!-- AI USAGE -->
+        <h2>AI Usage</h2>
+        <p>
+            We used Claude throughout this project. Claude helped us read and
+            understand the OECD dataset early on &mdash; for example, explaining that entries like
+            VAT, BRN, EU27_2020, OECDA, and OECDSO were not individual countries but a city-state,
+            a small outlier nation, and regional aggregates, and explaining why mixing these with
+            individual countries in a visualization would be misleading. Claude also clarified
+            that the three-letter ISO country codes used in the dataset could be easy to confuse
+            (for example AUS is Australia, not Austria, which is AUT). Claude helped us understand
+            why different countries had different numbers of data points across years and how
+            summing across those unequal reporting periods without disclosure produces a misleading
+            comparison &mdash; which we then intentionally exploited for the black hat visualization.
+            Claude also provided guidance throughout the webpage build process and
+            helped clean up and structure the webpage code to have Tableau visuals within it.
+        </p>
+        <p>
+            Major design decisions, the choice of deceptive techniques, and the overall framing
+            of both visualizations were developed and decided by us.
+        </p>
+
+        <!-- REFERENCES -->
+        <h2>References</h2>
+        <ul>
+            <li>OECD Greenhouse Gas Emissions Dataset &mdash; <a href="https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_AIR_GHG%40DF_AIR_GHG&df[ag]=OECD.ENV.EPI&dq=.A.GHG._T.KG_CO2E_PS&pd=2014%2C&to[TIME_PERIOD]=false&lb=nm" target="_blank">stats.oecd.org</a></li>
+            <li>Tableau Public &mdash; Visualization tool</li>
+            <li>Claude &mdash; AI assistance tool</li>
+        </ul>
+    </div>
+
+    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
+</body>
+</html>
